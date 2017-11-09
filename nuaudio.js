@@ -246,7 +246,13 @@ function handleFinishSessionRequest(intent, session, callback) {
         buildSpeechletResponseWithoutCard("Good bye! Thanks for using NuAudio", "", true));
 }
 
-
+function  url2() {
+    return " 
+function getJSON(callback) {
+    
+    request.get(url2(), function(error, response, body) {
+        var d = JSON.parse(body)
+        var result =
 // ------- Helper functions to build responses for Alexa -------
 
 
