@@ -44,6 +44,7 @@ var date_release = {
      }
 };
 
+//var artist = event.request.intent.slots.Artist.value.toLowerCase()
 
 // Route the incoming request based on type (LaunchRequest, IntentRequest,
 // etc.) The JSON body of the request is provided in the event parameter.
@@ -169,19 +170,41 @@ function getWelcomeResponse(callback) {
 }
 
 function handleArtistResponse(intent, session, callback) {
-    var artist = intent.slots.Artist.value.toLowerCase()
+   var artist = intent.slots.Artist.value.toLowerCase()
     
-    if (!artists[artist]){
-        var speechOutput = "I cannot find the artist that you are asking for. Please ask about another artist."
-        var repromtText = "Try asking about another artist"
-        var header = "Not on here"
+    
+    function url() {
+ //   var artist_url = "tyler the creator"
+    var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=" + artist
+ //   var artist_url = intent.slots.Artist.value.toLowerCase()
+    return url //"https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=tyler+the+creator"
+}
+function getJSON(callback) {
+    // HTTP - WIKPEDIA
+     request.get(url(), function(error, response, body) {
+         var d = JSON.parse(body)
+         var result = d.query.search[0].size
         
-    } else {
+         if (result > 0) {
+             callback(result);
+         } else {
+             callback("ERROR")
+         }
+     })
+}
+
+//    if (!artists[artist]){
+//        var speechOutput = "I cannot find the artist that you are asking for. Please ask about another artist."
+//        var repromtText = "Try asking about another artist"
+//        var header = "Not on here"
+        
+//    } else {
         
         getJSON(function(data) {
         if (data != "ERROR") {
             var speechOutput = data
         }
+        //var speechOutput = url()
         var shouldEndSession = false
     callback(session.attributes, buildSpeechletResponse(header, speechOutput, repromptText, shouldEndSession))
         
@@ -192,7 +215,7 @@ function handleArtistResponse(intent, session, callback) {
         var repromptText = "Would you like to hear about another artist?"
         var header = capitalizeFirst(artist)
         
-    }
+//    }
   //  var shouldEndSession = false
   //  callback(session.attributes, buildSpeechletResponse(header, speechOutput, repromptText, shouldEndSession))
 }
@@ -258,9 +281,20 @@ function handleFinishSessionRequest(intent, session, callback) {
         buildSpeechletResponseWithoutCard("Thank you for using NuAudio. Goodbye!", "", true));
 }
 
-function url() {
-    return "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=Tyler+The+Creator" 
+function create_url_withname() {
+   var artist_url = intent.slots.Artist.value.toLowerCase()
+//   var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch="
+//   var new_url = url.concat(artist_url)
+   return artist_url
 }
+/*
+function url() {
+ //   var artist_url = "tyler the creator"
+    var url = "https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=" + artist_url
+    var artist_url = this.event.request.intent.slots.Artist.value.toLowerCase()
+    return url //"https://en.wikipedia.org/w/api.php?action=query&format=json&list=search&utf8=1&srsearch=tyler+the+creator"
+}
+*/
 function url2() {
     return {
         url: "https://api.spotify.com",
@@ -275,7 +309,7 @@ function getJSON(callback) {
     // HTTP - WIKPEDIA
      request.get(url(), function(error, response, body) {
          var d = JSON.parse(body)
-         var result = d.query.search[0]
+         var result = d.query.search[0].size
         
          if (result > 0) {
              callback(result);
