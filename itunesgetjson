@@ -1,0 +1,16 @@
+function url(){
+    return "https://itunes.apple.com/search?term=rihanna&entity=album&limit=1"
+}
+
+function getJSON(callback){
+    request.get(url(), function(error, response, body){
+       var d = JSON.parse(body)
+       var result = d.collectionName
+       if (result > 0 ){
+           callback(result)
+       } else {
+           callback(ERROR)
+       }
+       
+    })
+}
