@@ -149,9 +149,9 @@ function onSessionEnded(sessionEndedRequest, session) {
 function getWelcomeResponse(callback) {
     
     var speechOutput = "Welcome to NuAudio! I can tell you about some new album releases: " +
-        "Which artist do you want to know about?"
+        "Which artist would you like to know about?"
     
-    var reprompt = "Which artist do you want to know about?"
+    var reprompt = "Which artist would you like to know about?"
     
     var header = "NuAudio releases"
     
@@ -169,15 +169,15 @@ function handleArtistResponse(intent, session, callback) {
     var artist = intent.slots.Artists.value.toLowerCase()
     
     if (!artists[artist]){
-        var speechOutput = "That artist is not in my current database. Try another"
+        var speechOutput = "I cannot find the artist that you are asking for. Please ask about another artist."
         var repromtText = "Try asking about another artist"
         var header = "Not on here"
         
     } else {
         var album = artists[artist].album
         var when = artists[artist].when
-        var speechOutput = capitalizeFirst(artist) + " " + album + " " + when + ". Do you wnat to know about another?"
-        var repromptText = "Do you want to know about another artist?"
+        var speechOutput = capitalizeFirst(artist) + " " + album + " " + when + ". Would you like to hear about another artist?"
+        var repromptText = "Would you like to hear about another artist?"
         var header = capitalizeFirst(artist)
         
     }
@@ -198,15 +198,15 @@ function handleDateResponse(intent, session, callback) {
     var date = intent.slots.Date.value.toLowerCase()
     
     if (!date_release[date]){
-        var speechOutput = "Sorry, that date is to far in the future. Try another"
+        var speechOutput = "Sorry, that date is too far in the future. Please ask about another"
         var repromtText = "Try asking about new music today"
         var header = "Not on here"
         
     } else {
         var artist = date_release[date].artist
         var when = date_release[date].when
-        var speechOutput = capitalizeFirst(artist) + " " + "has new music on" + " " + when + ". Do you want to know about another?"
-        var repromptText = "Do you want to know about another artist?"
+        var speechOutput = capitalizeFirst(artist) + " " + "has new music on" + " " + when + ". Would you like to know about another?"
+        var repromptText = "Would you like to know about another artist?"
         var header = capitalizeFirst(artist)
         
     }
@@ -243,10 +243,16 @@ function handleGetHelpRequest(intent, session, callback) {
 function handleFinishSessionRequest(intent, session, callback) {
     // End the session with a "Good bye!" if the user wants to quit the game
     callback(session.attributes,
-        buildSpeechletResponseWithoutCard("Good bye! Thanks for using NuAudio", "", true));
+        buildSpeechletResponseWithoutCard("Thank you for using NuAudio. Goodbye!", "", true));
 }
 
-
+function  url2() {
+    return " 
+function getJSON(callback) {
+    
+    request.get(url2(), function(error, response, body) {
+        var d = JSON.parse(body)
+        var result =
 // ------- Helper functions to build responses for Alexa -------
 
 
