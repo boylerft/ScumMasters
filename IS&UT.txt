@@ -1,0 +1,81 @@
+{
+  "intents": [
+    {
+      "slots": [
+        {
+          "name": "Artist",
+          "type": "AMAZON.Artist"
+        }
+      ],
+      "intent": "ArtistsIntent"
+    },
+    {
+      "slots": [
+        {
+          "name": "Date",
+          "type": "LIST_OF_DATES"
+        }
+      ],
+      "intent": "DateIntent"
+    },
+    {
+      "intent": "AMAZON.YesIntent"
+    },
+    {
+      "intent": "MoreIntent"
+    },
+    {
+      "intent": "AMAZON.NoIntent"
+    },
+    {
+      "intent": "AMAZON.HelpIntent"
+    },
+    {
+      "intent": "AMAZON.StopIntent"
+    },
+    {
+      "intent": "AMAZON.CancelIntent"
+    }
+  ]
+}
+
+
+UTTERANCES 
+
+ArtistsIntent {Artist}
+ArtistsIntent Tell me about {Artist}
+ArtistsIntent Talk about {Artist}
+ArtistsIntent What has {Artist} released
+ArtistsIntent {Artist} releases
+ArtistsIntent New releases by {Artist}
+ArtistsIntent new music from {Artist}
+ArtistsIntent music from {Artist}
+ArtistsIntent new music by {Artist}
+ArtistsIntent {Artist} recent music
+ArtistsIntent recent music by {Artist}
+ArtistsIntent releases of {Artist}
+ArtistsIntent {Artist} releases
+ArtistsIntent Content by {Artist}
+ArtistsIntent {Artist} releases
+ArtistsIntent More by {Artist}
+ArtistsIntent Music by {Artist}
+ArtistsIntent Songs by {Artist}
+ArtistsIntent Releases by {Artist}
+ArtistsIntent {Artist} music
+ArtistsIntent music for {Artist}
+ArtistsIntent songs for {Artist}
+ArtistsIntent things for {Artist}
+ArtistsIntent content for {Artist}
+ArtistsIntent more music for {Artist}
+ArtistsIntent get some information for {Artist}
+DateIntent releases today
+DateIntent {Date}
+DateIntent new releases {Date}
+DateIntent new music {Date}
+DateIntent what came out {Date}
+DateIntent whats out {Date}
+DateIntent what new music is coming out {Date}
+AMAZON.HelpIntent Whos made an album recently
+AMAZON.HelpIntent What were the names again
+AMAZON.HelpIntent Who
+AMAZON.HelpIntent What were the artists names
